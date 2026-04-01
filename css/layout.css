@@ -103,7 +103,7 @@
     gap: 12px; cursor: pointer; transition: opacity 0.3s ease;
 }
 .store-card:hover { opacity: 0.7; }
-.card-image { width: 100%; height: 160px; background-color: #222; border-radius: 8px; }
+.card-image { width: 100%; height: 160px; background-color: #f0f0f0; border-radius: 8px; }
 .card-info { display: flex; flex-direction: column; gap: 6px; }
 .card-name {
     font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text-active); 
@@ -111,11 +111,13 @@
 }
 .card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; }
 .past-tag { color: var(--text-muted); }
-.saved-tag { color: #ffffff; }
+.saved-tag { color: #000000; }
 
 /* --- 下部ナビゲーション --- */
 .bottom-nav {
-    width: 100%; padding: 10px 0 25px 0; 
+    width: 100%; 
+    /* ✅ iPhoneのホームインジケーター（下の横棒）に被らないように安全領域を確保 */
+    padding: 10px 0 calc(25px + env(safe-area-inset-bottom)) 0; 
     display: flex; justify-content: space-evenly; align-items: center;
     opacity: 0; z-index: 30; pointer-events: none; box-sizing: border-box;
     position: relative; background-color: var(--bg);
@@ -128,16 +130,10 @@
 }
 .nav-item svg { width: 18px; height: 18px; fill: currentColor; }
 
-/* ✅ Tアイコンの視覚的なサイズと高さを他のSVGアイコンと完璧に一致させました */
 .nav-t-icon {
-    font-family: 'Bodoni Moda', serif; 
-    font-size: 15px; /* 18pxから15pxに縮小して目の錯覚を補正 */
-    font-weight: 400; line-height: 1;
-    display: flex; justify-content: center; align-items: center; 
-    width: 18px; height: 18px; /* 箱の大きさはSVGと同じ */
-    color: currentColor;
+    font-family: 'Bodoni Moda', serif; font-size: 15px; font-weight: 400; line-height: 1;
+    display: flex; justify-content: center; align-items: center; width: 18px; height: 18px; color: currentColor;
 }
-
 .nav-text { font-family: 'Bodoni Moda', serif; font-size: 10px; font-weight: 500; font-style: italic; letter-spacing: 0.15em; }
 
 .nav-item::after {
