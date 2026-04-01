@@ -10,7 +10,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
+    height: 100vh; /* 古いブラウザ用の予備 */
+    height: 100dvh; /* ✅ Safari等のメニューバーを除いた正確な高さ */
     background-color: var(--bg);
     color: var(--text-active);
     font-family: 'Inter', 'Noto Serif JP', serif;
