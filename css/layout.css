@@ -6,10 +6,16 @@
     transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* ✅ 視覚的な中央（少し上）に配置して、沈んだ印象をなくす */
 .elegant-t {
-    font-family: 'Bodoni Moda', serif; font-size: 35vh; 
-    font-weight: 300; line-height: 1; color: #ffffff; 
-    letter-spacing: -0.05em; user-select: none; transform: translateY(-5%); 
+    font-family: 'Bodoni Moda', serif; 
+    font-size: 25vh; 
+    font-weight: 300; 
+    line-height: 0.8; 
+    color: #ffffff; 
+    letter-spacing: -0.05em; 
+    user-select: none; 
+    transform: translateY(-12%); /* 上に引き上げて美しい重心（オプティカル・センター）を作る */
 }
 
 #app-header {
@@ -103,7 +109,7 @@
     gap: 12px; cursor: pointer; transition: opacity 0.3s ease;
 }
 .store-card:hover { opacity: 0.7; }
-.card-image { width: 100%; height: 160px; background-color: #f0f0f0; border-radius: 8px; }
+.card-image { width: 100%; height: 160px; background-color: #222; border-radius: 8px; }
 .card-info { display: flex; flex-direction: column; gap: 6px; }
 .card-name {
     font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text-active); 
@@ -111,12 +117,11 @@
 }
 .card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; }
 .past-tag { color: var(--text-muted); }
-.saved-tag { color: #000000; }
+.saved-tag { color: #ffffff; }
 
 /* --- 下部ナビゲーション --- */
 .bottom-nav {
     width: 100%; 
-    /* ✅ iPhoneのホームインジケーター（下の横棒）に被らないように安全領域を確保 */
     padding: 10px 0 calc(25px + env(safe-area-inset-bottom)) 0; 
     display: flex; justify-content: space-evenly; align-items: center;
     opacity: 0; z-index: 30; pointer-events: none; box-sizing: border-box;
