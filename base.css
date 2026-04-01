@@ -1,0 +1,20 @@
+:root {
+    --bg: #ffffff;          /* 爽やかな白背景 */
+    --line-color: rgba(0, 0, 0, 0.05); /* 鉛筆のような極薄の黒線 */
+    --text-active: #111111; /* 引き締まった黒文字 */
+    --text-muted: #999999;  /* 上品なグレー */
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: var(--bg);
+    color: var(--text-active);
+    font-family: 'Inter', 'Noto Serif JP', serif;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+}
