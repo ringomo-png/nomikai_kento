@@ -6,16 +6,10 @@
     transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* ✅ 視覚的な中央（少し上）に配置して、沈んだ印象をなくす */
 .elegant-t {
-    font-family: 'Bodoni Moda', serif; 
-    font-size: 25vh; 
-    font-weight: 300; 
-    line-height: 0.8; 
-    color: #ffffff; 
-    letter-spacing: -0.05em; 
-    user-select: none; 
-    transform: translateY(-12%); /* 上に引き上げて美しい重心（オプティカル・センター）を作る */
+    font-family: 'Bodoni Moda', serif; font-size: 25vh; 
+    font-weight: 300; line-height: 0.8; color: #ffffff; 
+    letter-spacing: -0.05em; user-select: none; transform: translateY(-12%); 
 }
 
 #app-header {
@@ -62,11 +56,13 @@
 #countdown-text {
     font-family: 'Bodoni Moda', serif; font-size: 16px; 
     font-weight: 300; font-style: italic; letter-spacing: 0.25em; 
+    text-indent: 0.25em; /* ✅ 文字間隔のズレを補正 */
     color: var(--text-active); font-variant-numeric: tabular-nums;
 }
 
 .info-text {
     font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
+    text-indent: 0.1em; /* ✅ 文字間隔のズレを補正 */
     color: var(--text-active); margin: 0; text-align: center;
     opacity: 0; filter: blur(15px); transform: scale(0.95);
 }
@@ -76,10 +72,12 @@
     opacity: 0; filter: blur(15px); transform: scale(0.95); margin-top: 10px; 
 }
 
+/* ✅ Safari特有のボタンの余白を完全にリセット */
 .icon-btn {
     background: transparent; border: none; cursor: pointer;
     color: var(--text-active); padding: 8px; display: inline-flex;
     transition: opacity 0.3s ease, transform 0.2s ease; pointer-events: auto;
+    margin: 0; outline: none; appearance: none; -webkit-appearance: none;
 }
 .icon-btn:hover { opacity: 0.5; transform: scale(0.9); }
 .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
@@ -94,7 +92,7 @@
 .location-group { width: 100%; margin-bottom: 35px; display: flex; flex-direction: column; }
 .location-title {
     font-family: 'Bodoni Moda', serif; font-size: 11px; font-style: italic;
-    letter-spacing: 0.2em; color: var(--text-muted); padding-left: 30px; margin-bottom: 15px;
+    letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-muted); padding-left: 30px; margin-bottom: 15px;
 }
 .card-scroll-container {
     display: flex; gap: 15px; padding: 0 30px; overflow-x: auto;
@@ -115,7 +113,7 @@
     font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text-active); 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; }
+.card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-indent: 0.1em;}
 .past-tag { color: var(--text-muted); }
 .saved-tag { color: #ffffff; }
 
@@ -123,14 +121,16 @@
 .bottom-nav {
     width: 100%; 
     padding: 10px 0 calc(25px + env(safe-area-inset-bottom)) 0; 
-    display: flex; justify-content: space-evenly; align-items: center;
+    /* ✅ space-evenlyを外し、各アイテムに均等な幅(flex:1)を持たせて絶対的な中央に揃える */
+    display: flex; justify-content: space-between; align-items: center;
     opacity: 0; z-index: 30; pointer-events: none; box-sizing: border-box;
     position: relative; background-color: var(--bg);
 }
 
 .nav-item { 
+    flex: 1; /* ✅ 画面幅を正確に4等分し、アイコンの重さによるズレを完全排除 */
     color: var(--text-muted); cursor: pointer; transition: color 0.3s ease; 
-    position: relative; padding: 8px 15px; display: flex;
+    position: relative; padding: 8px 0; display: flex;
     flex-direction: column; align-items: center; gap: 6px; pointer-events: auto;
 }
 .nav-item svg { width: 18px; height: 18px; fill: currentColor; }
@@ -139,7 +139,10 @@
     font-family: 'Bodoni Moda', serif; font-size: 15px; font-weight: 400; line-height: 1;
     display: flex; justify-content: center; align-items: center; width: 18px; height: 18px; color: currentColor;
 }
-.nav-text { font-family: 'Bodoni Moda', serif; font-size: 10px; font-weight: 500; font-style: italic; letter-spacing: 0.15em; }
+.nav-text { 
+    font-family: 'Bodoni Moda', serif; font-size: 10px; font-weight: 500; font-style: italic; 
+    letter-spacing: 0.15em; text-indent: 0.15em; /* ✅ 文字間隔のズレを補正 */
+}
 
 .nav-item::after {
     content: ''; position: absolute; bottom: 0px; left: 50%;
@@ -152,6 +155,6 @@
 .nav-item:hover { color: var(--text-active); }
 .nav-item:hover::after { transform: translateX(-50%) scaleX(1); }
 
-.modal-title { font-family: 'Bodoni Moda', serif; font-size: 14px; font-weight: 400; font-style: italic; letter-spacing: 0.25em; color: var(--text-muted); }
+.modal-title { font-family: 'Bodoni Moda', serif; font-size: 14px; font-weight: 400; font-style: italic; letter-spacing: 0.25em; text-indent: 0.25em; color: var(--text-muted); }
 .modal-list { display: flex; flex-direction: column; gap: 24px; align-items: center; }
-.member-item { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 300; letter-spacing: 0.2em; color: var(--text-active); position: relative; display: flex; justify-content: center; align-items: center; }
+.member-item { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 300; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-active); position: relative; display: flex; justify-content: center; align-items: center; }
