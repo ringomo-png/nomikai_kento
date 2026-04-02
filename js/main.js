@@ -207,8 +207,10 @@ const startDrag = (x, y) => {
     if (!isRevealed) return; 
     if (isListViewOpen) return; 
     isDragging = true;
-    startX = x - currentTranslateX;
-    startY = y - currentTranslateY;
+    startX = x; 
+    startY = y;
+    currentTranslateX = 0;
+    currentTranslateY = 0;
     dragAxis = null; 
     wrapper.style.transition = 'none'; 
 };
@@ -217,15 +219,20 @@ const onDrag = (x, y) => {
     if (!isDragging) return;
     let moveX = x - startX;
     let moveY = y - startY;
+
     if (!dragAxis) {
-        if (Math.abs(moveX) > Math.abs(moveY)) dragAxis = 'x'; 
-        else dragAxis = 'y'; 
+        if (Math.abs(moveX) > 10 || Math.abs(moveY) > 10) {
+            dragAxis = Math.abs(moveX) > Math.abs(moveY) ? 'x' : 'y';
+        }
+        return; 
     }
+
+    // ✅ 【重要】縦と横で「指の追従性（摩擦）」を明確に変える！
     if (dragAxis === 'x') {
-        currentTranslateX = moveX * 0.4; 
+        currentTranslateX = moveX * 0.7; // 横は指にスッと吸い付くように軽く
         wrapper.style.transform = `translateX(${currentTranslateX}px)`;
     } else {
-        currentTranslateY = moveY * 0.4;
+        currentTranslateY = moveY * 0.3; // 縦はバネを引くように「重たく」する
         wrapper.style.transform = `translateY(${currentTranslateY}px)`;
     }
 };
@@ -234,9 +241,9 @@ const endDrag = () => {
     if (!isDragging) return;
     isDragging = false;
     
-    // ✅ ここがポイント！縦と横で「切り替わるまでの引っ張り量」を変えました
-    const thresholdX = 50;  // 横は少しのフリックでスッと切り替わる
-    const thresholdY = 100; // 縦はグッと奥まで引っ張らないと切り替わらない
+    // ✅ 縦と横で「切り替わるために必要な引っ張り距離」を変える
+    const thresholdX = 40; // 横は軽いフリックでOK
+    const thresholdY = 60; // 縦はしっかり奥まで押し込まないとダメ
 
     if (dragAxis === 'y') {
         let currentIndex = viewOrder.indexOf(currentView);
@@ -268,6 +275,7 @@ const endDrag = () => {
             return; 
         }
     }
+    
     wrapper.style.transition = `transform ${ANIM_IN_MS / 1000}s cubic-bezier(0.2, 0.8, 0.2, 1)`;
     wrapper.style.transform = `translate(0px, 0px)`;
     currentTranslateX = 0; currentTranslateY = 0;
