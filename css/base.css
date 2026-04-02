@@ -1,8 +1,8 @@
 :root {
-    --bg: #ffffff;          /* 爽やかな白背景 */
-    --line-color: rgba(0, 0, 0, 0.05); /* 鉛筆のような極薄の黒線 */
-    --text-active: #111111; /* 引き締まった黒文字 */
-    --text-muted: #999999;  /* 上品なグレー */
+    --bg: #ffffff;          
+    --line-color: rgba(0, 0, 0, 0.05); 
+    --text-active: #111111; 
+    --text-muted: #999999;  
 }
 
 body {
@@ -10,12 +10,14 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh; /* 古いブラウザ用の予備 */
-    height: 100dvh; /* ✅ Safari等のメニューバーを除いた正確な高さ */
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw; /* 画面幅に完全に固定 */
     background-color: var(--bg);
     color: var(--text-active);
     font-family: 'Inter', 'Noto Serif JP', serif;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden; /* 横ブレを完全に防止 */
     overscroll-behavior-y: none;
     -webkit-tap-highlight-color: transparent;
 }
