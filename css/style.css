@@ -1,0 +1,319 @@
+:root {
+    --bg: #ffffff;          
+    --line-color: rgba(0, 0, 0, 0.03); 
+    --text-active: #111111; 
+    --text-muted: #999999;  
+}
+
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-color: var(--bg);
+    font-family: 'Inter', 'Noto Serif JP', serif;
+    overflow: hidden;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* --- 上部：ヘッダーブロック --- */
+#app-header {
+    width: 100%;
+    padding: 30px 30px 20px 30px; 
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 30;
+    background-color: var(--bg);
+    position: relative;
+}
+
+#header-line {
+    position: absolute;
+    bottom: 0;
+    left: 30px;  
+    right: 30px;
+    height: 1px;
+    background-color: var(--line-color);
+    opacity: 0; 
+    pointer-events: none;
+}
+
+#top-logo {
+    font-size: 15px; 
+    font-weight: 600; 
+    letter-spacing: 0.15em; 
+    text-transform: none; 
+    color: var(--text-active); 
+    opacity: 0;
+    pointer-events: none;
+}
+
+#profile-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted); 
+    cursor: pointer;
+    opacity: 0; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease, transform 0.2s ease, color 0.3s ease;
+}
+
+#profile-icon svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor; 
+}
+
+#profile-icon:hover {
+    opacity: 0.8;
+    color: var(--text-active);
+    transform: scale(0.9);
+}
+
+/* --- 中央：メインコンテンツブロック（ドラッグ領域） --- */
+#interactive-wrapper {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    cursor: grab; 
+    transform: translateY(0px);
+    will-change: transform;
+    background-color: transparent;
+}
+
+#interactive-wrapper:active { cursor: grabbing; }
+
+#countdown-screen {
+    padding: 20px;
+    font-size: 16px; 
+    font-weight: 300; 
+    letter-spacing: 0.1em;
+    color: var(--text-active);
+    font-variant-numeric: tabular-nums; 
+    transition: opacity 1s ease-out;
+    position: absolute;
+    pointer-events: auto; 
+}
+
+#countdown-screen:hover { opacity: 0.5; }
+
+/* 詳細画面パネル */
+#detail-screen {
+    display: none; 
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; 
+    transition: opacity 0.3s ease; 
+}
+
+#detail-screen.active { display: flex; }
+
+/* メンバーリストパネル */
+#participants-view {
+    display: none; 
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#participants-view.active {
+    display: flex;
+}
+
+.info-text {
+    font-size: 13px;
+    font-weight: 500; 
+    letter-spacing: 0.1em;
+    color: var(--text-active);
+    margin: 0;
+    text-align: center;
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(0.95);
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+.blink-colon {
+    animation: blink 1s infinite;
+    display: inline-block; 
+    position: relative;
+    top: -1px; 
+}
+
+@keyframes waterRipple {
+    0%   { transform: translate(0, 0) scale(1) skewX(0deg); filter: blur(0px); }
+    20%  { transform: translate(-3px, 2px) scale(0.99) skewX(-1.5deg); filter: blur(1.5px); }
+    40%  { transform: translate(2px, -1px) scale(1.01) skewX(1deg); filter: blur(0.5px); }
+    60%  { transform: translate(-1px, 1px) scale(0.995) skewX(-0.5deg); filter: blur(0px); }
+    80%  { transform: translate(1px, 0) scale(1) skewX(0deg); filter: blur(0px); }
+    100% { transform: translate(0, 0) scale(1) skewX(0deg); filter: blur(0px); }
+}
+
+.shake-active {
+    animation: waterRipple 1.0s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px; 
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(0.95);
+    margin-top: 10px; 
+}
+
+.icon-btn {
+    background: transparent; border: none; cursor: pointer;
+    color: var(--text-active); padding: 8px; display: inline-flex;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    pointer-events: auto;
+}
+.icon-btn:hover { opacity: 0.5; transform: scale(0.9); }
+
+.icon-btn svg {
+    width: 20px; height: 20px; 
+    fill: currentColor; 
+}
+
+/* --- 下部：ナビゲーションブロック --- */
+.bottom-nav {
+    width: 100%;
+    padding: 10px 0 25px 0; 
+    display: flex;
+    justify-content: space-evenly; 
+    align-items: center;
+    opacity: 0; 
+    z-index: 30; 
+    pointer-events: none; 
+    box-sizing: border-box;
+    background-color: var(--bg);
+    border-top: none; 
+}
+
+.nav-item { 
+    color: var(--text-muted); 
+    cursor: pointer; 
+    transition: color 0.3s ease; 
+    position: relative;
+    padding: 8px 15px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px; 
+    pointer-events: auto;
+}
+
+.nav-item svg {
+    width: 18px; height: 18px; 
+    fill: currentColor;
+}
+
+.nav-text {
+    font-family: 'Montserrat', sans-serif; 
+    font-size: 9px; 
+    font-weight: 600; 
+    letter-spacing: 0.15em;
+}
+
+.nav-item::after {
+    content: ''; position: absolute; bottom: 0px; left: 50%;
+    width: 40%; height: 1.5px; 
+    background-color: var(--text-active);
+    transform: translateX(-50%) scaleX(0); 
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+.nav-item:hover { color: var(--text-active); }
+.nav-item:hover::after { transform: translateX(-50%) scaleX(1); }
+
+/* --- アニメーション定義 --- */
+@keyframes concurrentReveal {
+    0% { opacity: 0; filter: blur(15px); transform: scale(0.95); letter-spacing: -2px; }
+    100% { opacity: 1; filter: blur(0px); transform: scale(1); letter-spacing: 0.08em; } 
+}
+
+@keyframes lineReveal {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+.reveal { 
+    animation: concurrentReveal 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+    pointer-events: auto !important;
+}
+
+.reveal-skip {
+    animation: none !important;
+    opacity: 1 !important; filter: blur(0px) !important;
+    transform: scale(1) !important; letter-spacing: 0.08em !important;
+    pointer-events: auto !important;
+}
+
+#top-logo.reveal { 
+    animation: concurrentReveal 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; 
+    pointer-events: auto !important; 
+}
+#top-logo.reveal-skip { letter-spacing: 0.15em !important; }
+
+#header-line.reveal {
+    animation: lineReveal 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+#header-line.reveal-skip {
+    opacity: 1 !important;
+}
+
+/* メンバーリスト内の要素 */
+.modal-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em; 
+    color: var(--text-muted);
+}
+
+.modal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px; 
+    align-items: center;
+}
+
+.member-item {
+    font-size: 15px; 
+    font-weight: 500; 
+    letter-spacing: 0.1em; 
+    color: var(--text-active);
+    position: relative; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-close {
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-top: 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    pointer-events: auto;
+}
+.modal-close:hover { color: var(--text-active); transform: scale(0.9); }

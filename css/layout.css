@@ -1,160 +1,109 @@
-#cover-screen {
-    position: fixed; top: 0; left: 0; width: 100vw; 
-    height: 100vh; height: 100dvh; background-color: #000000; 
-    display: flex; justify-content: center; align-items: center;
-    pointer-events: auto; cursor: pointer; z-index: 9999; 
-    transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-}
+/* =========================================
+   1. BASE & COVER (ベースと漆黒の幕)
+   ========================================= */
+#cover-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background-color: #000000; display: flex; justify-content: center; align-items: center; pointer-events: auto; cursor: pointer; z-index: 9999; transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+.elegant-t { font-family: 'Bodoni Moda', serif; font-size: 25vh; font-weight: 300; line-height: 0.8; color: #ffffff; user-select: none; transform: translateY(4%); }
 
-.elegant-t {
-    font-family: 'Bodoni Moda', serif; font-size: 25vh; 
-    font-weight: 300; line-height: 0.8; color: #ffffff; 
-    letter-spacing: -0.05em; user-select: none; transform: translateY(-12%); 
-}
-
-#app-header {
-    width: 100%; padding: 30px 30px 20px 30px; box-sizing: border-box;
-    display: flex; justify-content: space-between; align-items: center;
-    z-index: 30; position: relative;
-}
-
-#header-line {
-    position: absolute; bottom: 0; left: 30px; right: 30px;
-    height: 1px; background-color: var(--line-color);
-    opacity: 0; pointer-events: none;
-}
-
-#top-logo {
-    font-size: 15px; font-weight: 600; letter-spacing: 0.15em; 
-    color: var(--text-active); opacity: 0; pointer-events: none;
-}
-
-#profile-icon {
-    display: flex; justify-content: center; align-items: center;
-    color: var(--text-muted); cursor: pointer;
-    opacity: 0; pointer-events: none; 
-    transition: opacity 0.3s ease, transform 0.2s ease, color 0.3s ease;
-}
+#app-header { width: 100%; padding: 30px 30px 20px 30px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; z-index: 30; position: relative; }
+#header-line { position: absolute; bottom: 0; left: 30px; right: 30px; height: 1px; background-color: var(--line-color); opacity: 0; pointer-events: none; }
+#top-logo { font-size: 15px; font-weight: 600; letter-spacing: 0.15em; color: var(--text-active); opacity: 0; pointer-events: none; }
+#profile-icon { display: flex; justify-content: center; align-items: center; color: var(--text-muted); cursor: pointer; opacity: 0; pointer-events: none; transition: opacity 0.3s ease, transform 0.2s ease, color 0.3s ease; }
 #profile-icon svg { width: 28px; height: 28px; fill: currentColor; }
 #profile-icon:hover { opacity: 0.8; color: var(--text-active); transform: scale(0.9); }
 
-#interactive-wrapper {
-    flex-grow: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    width: 100%; position: relative; z-index: 10; cursor: grab; 
-    transform: translate(0px, 0px); will-change: transform;
-}
+#interactive-wrapper { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 10; cursor: grab; transform: translate(0px, 0px); will-change: transform; }
 #interactive-wrapper:active { cursor: grabbing; }
 
-.view-panel {
-    display: none; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
-    width: 100%; height: 100%; opacity: 0; 
-    position: absolute; top: 0; left: 0; box-sizing: border-box;
-}
+.view-panel { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 24px; width: 100%; height: 100%; opacity: 0; position: absolute; top: 0; left: 0; box-sizing: border-box; }
 .view-panel.active { display: flex; }
 
-#countdown-text {
-    font-family: 'Bodoni Moda', serif; font-size: 16px; 
-    font-weight: 300; font-style: italic; letter-spacing: 0.25em; 
-    text-indent: 0.25em; /* ✅ 文字間隔のズレを補正 */
-    color: var(--text-active); font-variant-numeric: tabular-nums;
-}
-
-.info-text {
-    font-size: 13px; font-weight: 500; letter-spacing: 0.1em;
-    text-indent: 0.1em; /* ✅ 文字間隔のズレを補正 */
-    color: var(--text-active); margin: 0; text-align: center;
-    opacity: 0; filter: blur(15px); transform: scale(0.95);
-}
-
-.action-buttons {
-    display: flex; justify-content: center; align-items: center; gap: 36px; 
-    opacity: 0; filter: blur(15px); transform: scale(0.95); margin-top: 10px; 
-}
-
-/* ✅ Safari特有のボタンの余白を完全にリセット */
-.icon-btn {
-    background: transparent; border: none; cursor: pointer;
-    color: var(--text-active); padding: 8px; display: inline-flex;
-    transition: opacity 0.3s ease, transform 0.2s ease; pointer-events: auto;
-    margin: 0; outline: none; appearance: none; -webkit-appearance: none;
-}
+/* =========================================
+   2. HOME (詳細・ゲスト・タイマー)
+   ========================================= */
+#countdown-text { font-family: 'Bodoni Moda', serif; font-size: 16px; font-weight: 300; font-style: italic; letter-spacing: 0.25em; text-indent: 0.25em; color: var(--text-active); font-variant-numeric: tabular-nums; }
+.info-text { font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-indent: 0.1em; color: var(--text-active); margin: 0; text-align: center; opacity: 0; filter: blur(15px); transform: scale(0.95); }
+.action-buttons { display: flex; justify-content: center; align-items: center; gap: 36px; opacity: 0; filter: blur(15px); transform: scale(0.95); margin-top: 10px; }
+.icon-btn { background: transparent; border: none; cursor: pointer; color: var(--text-active); padding: 8px; display: inline-flex; transition: opacity 0.3s ease, transform 0.2s ease; pointer-events: auto; margin: 0; outline: none; appearance: none; -webkit-appearance: none; }
 .icon-btn:hover { opacity: 0.5; transform: scale(0.9); }
 .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
-
-/* --- リスト画面 --- */
-#list-view {
-    justify-content: flex-start; padding-top: 20px; 
-    padding-bottom: 20px; 
-    overflow-y: auto; overscroll-behavior-y: contain;
-}
-
-.location-group { width: 100%; margin-bottom: 35px; display: flex; flex-direction: column; }
-.location-title {
-    font-family: 'Bodoni Moda', serif; font-size: 11px; font-style: italic;
-    letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-muted); padding-left: 30px; margin-bottom: 15px;
-}
-.card-scroll-container {
-    display: flex; gap: 15px; padding: 0 30px; overflow-x: auto;
-    scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; 
-    scroll-padding-left: 30px; 
-}
-.card-scroll-container::-webkit-scrollbar { display: none; }
-.card-scroll-container::after { content: ''; flex: 0 0 15px; }
-
-.store-card {
-    flex: 0 0 160px; scroll-snap-align: start; display: flex; flex-direction: column;
-    gap: 12px; cursor: pointer; transition: opacity 0.3s ease;
-}
-.store-card:hover { opacity: 0.7; }
-.card-image { width: 100%; height: 160px; background-color: #222; border-radius: 8px; }
-.card-info { display: flex; flex-direction: column; gap: 6px; }
-.card-name {
-    font-size: 13px; font-weight: 500; letter-spacing: 0.05em; color: var(--text-active); 
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; text-indent: 0.1em;}
-.past-tag { color: var(--text-muted); }
-.saved-tag { color: #ffffff; }
-
-/* --- 下部ナビゲーション --- */
-.bottom-nav {
-    width: 100%; 
-    padding: 10px 0 calc(25px + env(safe-area-inset-bottom)) 0; 
-    /* ✅ space-evenlyを外し、各アイテムに均等な幅(flex:1)を持たせて絶対的な中央に揃える */
-    display: flex; justify-content: space-between; align-items: center;
-    opacity: 0; z-index: 30; pointer-events: none; box-sizing: border-box;
-    position: relative; background-color: var(--bg);
-}
-
-.nav-item { 
-    flex: 1; /* ✅ 画面幅を正確に4等分し、アイコンの重さによるズレを完全排除 */
-    color: var(--text-muted); cursor: pointer; transition: color 0.3s ease; 
-    position: relative; padding: 8px 0; display: flex;
-    flex-direction: column; align-items: center; gap: 6px; pointer-events: auto;
-}
-.nav-item svg { width: 18px; height: 18px; fill: currentColor; }
-
-.nav-t-icon {
-    font-family: 'Bodoni Moda', serif; font-size: 15px; font-weight: 400; line-height: 1;
-    display: flex; justify-content: center; align-items: center; width: 18px; height: 18px; color: currentColor;
-}
-.nav-text { 
-    font-family: 'Bodoni Moda', serif; font-size: 10px; font-weight: 500; font-style: italic; 
-    letter-spacing: 0.15em; text-indent: 0.15em; /* ✅ 文字間隔のズレを補正 */
-}
-
-.nav-item::after {
-    content: ''; position: absolute; bottom: 0px; left: 50%;
-    width: 40%; height: 1.5px; background-color: var(--text-active);
-    transform: translateX(-50%) scaleX(0); transition: transform 0.3s ease; transform-origin: center;
-}
-.nav-item.active { color: var(--text-active); }
-.nav-item.active::after { transform: translateX(-50%) scaleX(1); }
-
-.nav-item:hover { color: var(--text-active); }
-.nav-item:hover::after { transform: translateX(-50%) scaleX(1); }
 
 .modal-title { font-family: 'Bodoni Moda', serif; font-size: 14px; font-weight: 400; font-style: italic; letter-spacing: 0.25em; text-indent: 0.25em; color: var(--text-muted); }
 .modal-list { display: flex; flex-direction: column; gap: 24px; align-items: center; }
 .member-item { font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 300; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-active); position: relative; display: flex; justify-content: center; align-items: center; }
+
+/* =========================================
+   3. 各機能画面のスクロール設定
+   ========================================= */
+#past-view, #list-view, #plan-view { justify-content: flex-start; padding-top: 20px; padding-bottom: 20px; overflow-y: auto; overscroll-behavior-y: contain; cursor: default; }
+
+/* =========================================
+   4. PAST (履歴画面)
+   ========================================= */
+.past-list-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 40px; padding: 20px 0 60px 0; }
+.past-day-group { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; }
+.past-date { font-family: 'Bodoni Moda', serif; font-size: 11px; font-style: italic; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-muted); margin-bottom: 4px; }
+.past-event { display: flex; flex-direction: column; align-items: center; gap: 8px; width: 100%; }
+.past-store { font-family: 'Noto Serif JP', serif; font-size: 15px; font-weight: 500; letter-spacing: 0.15em; text-indent: 0.15em; color: var(--text-active); text-align: center; display: flex; justify-content: center; align-items: center; gap: 6px; }
+.photo-icon { width: 14px; height: 14px; fill: var(--text-muted); opacity: 0.6; margin-top: -2px; }
+.past-members { font-size: 10px; font-weight: 400; letter-spacing: 0.05em; color: var(--text-muted); text-align: center; line-height: 1.8; padding: 0 30px; word-break: break-all; }
+
+/* =========================================
+   5. LIST (リスト画面)
+   ========================================= */
+.location-group { width: 100%; margin-bottom: 35px; display: flex; flex-direction: column; }
+.location-title { font-family: 'Bodoni Moda', serif; font-size: 11px; font-style: italic; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-muted); padding-left: 30px; margin-bottom: 15px; }
+.card-scroll-container { display: flex; gap: 15px; padding: 0 30px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; scroll-padding-left: 30px; }
+.card-scroll-container::-webkit-scrollbar { display: none; }
+.card-scroll-container::after { content: ''; flex: 0 0 15px; }
+.store-card { flex: 0 0 160px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 12px; cursor: pointer; transition: opacity 0.3s ease; }
+.store-card:hover { opacity: 0.7; }
+.card-image { width: 100%; height: 160px; background-color: #222; border-radius: 8px; }
+.card-info { display: flex; flex-direction: column; gap: 6px; }
+.card-name { font-size: 13px; font-weight: 500; color: var(--text-active); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.card-tag { font-family: 'Bodoni Moda', serif; font-size: 9px; font-weight: 500; letter-spacing: 0.1em; color: var(--text-muted); }
+
+/* =========================================
+   6. PLAN (予定作成画面)
+   ========================================= */
+.plan-scroll-container { width: 100%; display: flex; flex-direction: column; gap: 40px; padding-bottom: 80px; }
+.plan-section { display: flex; flex-direction: column; gap: 15px; width: 100%; }
+.plan-row { display: flex; justify-content: center; gap: 30px; padding: 0 30px; }
+.plan-section.half { width: 50%; }
+.plan-label { font-family: 'Bodoni Moda', serif; font-size: 10px; font-style: italic; letter-spacing: 0.2em; text-indent: 0.2em; color: var(--text-muted); text-align: center; }
+
+/* カレンダー */
+.calendar-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 30px; padding: 0 30px; scroll-padding-left: 30px; }
+.calendar-slider::-webkit-scrollbar { display: none; }
+.calendar-month { flex: 0 0 calc(100vw - 60px); scroll-snap-align: start; display: flex; flex-direction: column; gap: 15px; }
+.month-header { font-family: 'Bodoni Moda', serif; font-size: 13px; font-weight: 500; letter-spacing: 0.1em; color: var(--text-active); text-align: center; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px 5px; text-align: center; }
+.cal-day { font-size: 12px; font-weight: 400; color: var(--text-active); display: flex; justify-content: center; align-items: center; height: 28px; width: 28px; margin: 0 auto; border-radius: 50%; transition: background 0.2s, color 0.2s; }
+.cal-dim { font-size: 9px; color: var(--text-muted); }
+.cal-selected { background-color: var(--text-active); color: var(--bg); font-weight: 600; }
+
+/* iOS風ルーレット */
+.ios-picker { position: relative; height: 110px; display: flex; justify-content: center; align-items: center; mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 60%, transparent 100%); }
+.picker-col { height: 100%; overflow-y: auto; scroll-snap-type: y mandatory; scrollbar-width: none; padding: 40px 0; }
+.picker-col::-webkit-scrollbar { display: none; }
+.picker-item { height: 30px; display: flex; justify-content: center; align-items: center; scroll-snap-align: center; font-family: 'Bodoni Moda', serif; font-size: 18px; color: var(--text-active); }
+.picker-colon { font-family: 'Bodoni Moda', serif; font-size: 16px; margin: 0 10px; }
+.picker-highlight { position: absolute; top: 40px; left: 0; width: 100%; height: 30px; border-top: 1px solid var(--line-color); border-bottom: 1px solid var(--line-color); pointer-events: none; }
+.area-picker .picker-item { font-family: 'Noto Serif JP', serif; font-size: 13px; letter-spacing: 0.1em; }
+
+/* Tableボタン */
+.plan-action { display: flex; justify-content: center; margin-top: 20px; }
+.btn-table { font-family: 'Bodoni Moda', serif; font-size: 18px; font-style: italic; letter-spacing: 0.15em; background: transparent; color: var(--text-active); border: 1px solid var(--text-active); padding: 12px 50px; cursor: pointer; transition: all 0.4s ease; outline: none; }
+.btn-table:hover { background: var(--text-active); color: var(--bg); }
+
+/* =========================================
+   7. 下部ナビゲーション
+   ========================================= */
+.bottom-nav { width: 100%; padding: 10px 0 calc(25px + env(safe-area-inset-bottom)) 0; display: flex; justify-content: space-between; align-items: center; opacity: 0; z-index: 30; pointer-events: none; box-sizing: border-box; position: relative; background-color: var(--bg); }
+.nav-item { flex: 1; color: var(--text-muted); cursor: pointer; transition: color 0.3s ease; position: relative; padding: 8px 0; display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: auto; }
+.nav-item svg { width: 18px; height: 18px; fill: currentColor; }
+.nav-t-icon { font-family: 'Bodoni Moda', serif; font-size: 15px; font-weight: 400; line-height: 1; display: flex; justify-content: center; align-items: center; width: 18px; height: 18px; }
+.nav-text { font-family: 'Bodoni Moda', serif; font-size: 10px; font-weight: 500; font-style: italic; letter-spacing: 0.15em; text-indent: 0.15em; }
+.nav-item::after { content: ''; position: absolute; bottom: 0px; left: 50%; width: 40%; height: 1.5px; background-color: var(--text-active); transform: translateX(-50%) scaleX(0); transition: transform 0.3s ease; }
+.nav-item.active { color: var(--text-active); }
+.nav-item.active::after { transform: translateX(-50%) scaleX(1); }
+.nav-item:hover { color: var(--text-active); }
